@@ -181,6 +181,17 @@ else if(isset($_POST['Valider5']))
 			<img src="../img/erreur.jpg" width="2%">
 			<div class="affichage">
 			<?php
+			
+			$base = mysqli_connect("localhost", "root", "", "forum");	
+			mysqli_set_charset($base, "utf8");	
+
+			
+
+			$grade=$_POST['grade'];
+			$login=$_POST['users'];
+			$requete1="UPDATE utilisateurs SET grade='$grade' WHERE login='$login'";
+			mysqli_query($base, $requete1);
+			
 			echo $_POST['users'];
 			echo " ";
 			echo ":";
