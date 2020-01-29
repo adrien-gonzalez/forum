@@ -23,7 +23,7 @@ if(isset($_SESSION['login']))
 	<ul>
 		<li><a href="../index.php">Accueil</a></li>
 		<div class="deco">
-			<form  method="post" action="index.php">
+			<form  method="post" action="profil.php">
 				<input type="submit" name="deco" value="Déconnexion">
 			</form>
 		</div>
