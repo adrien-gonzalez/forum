@@ -10,7 +10,7 @@
 
 <body class="accueil">
 
-<header> 
+<header>  
 	<ul>
 <?php
 
