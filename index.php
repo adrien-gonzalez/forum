@@ -4,22 +4,22 @@
 	<title>Index de notre forum</title>
 	<link href="sources/forum.css" rel="stylesheet">
 	<meta charset="UTF-8">
-	
-	
+
+
 </head>
 
 <body class="accueil">
 
-<header>
+<header> 
 	<ul>
 <?php
 
 	session_start();
-	
+
 	$base = mysqli_connect("localhost", "root", "", "forum");
 	mysqli_set_charset($base, "utf8");
-	
-	
+
+
 
 	if (isset($_GET['sous-categorie']))
 	{
@@ -28,31 +28,31 @@
 	$caracteres2="/?topic=";
 	$topic=$_GET['numtopic'];
 	$_SESSION['categorie']=$_GET['nomcategorie'];
-	
+
 	$_SESSION['topic']=$_GET['nomtopic'];
-	
-	
+
+
 	$pages=$caracteres."".$categorie."".$caracteres2."".$topic;
-	
+
 	header('location: sources/forum.php'.$pages);
-	
+
 	}
 	if(isset($_POST['deco']))
 	{
 	unset($_SESSION['login']);
-	unset($_SESSION['password']);		
+	unset($_SESSION['password']);
 	}
-		
+
 	if(isset($_SESSION['login']))
 	{
 	$login=$_SESSION['login'];
 	$querygrade="SELECT grade from utilisateurs where login='$login'";
 	$resultgrade=mysqli_query($base, $querygrade);
 	$grade=mysqli_fetch_array($resultgrade);
-	
+
 	if(($grade['grade']==1)||($grade['grade']==2))
 	{
-?>		
+?>
 	<div>
 	<li><a href="sources/administration.php">Administration</a></li>
 	</div>
@@ -71,7 +71,7 @@
 		<input type="submit" name="deco" value="Déconnexion">
 	</form>
 	</div>
-<?php		
+<?php
 	}
 	else
 	{
@@ -85,7 +85,7 @@
 <?php
 }
 ?>
-	</ul>			
+	</ul>
 </header>
 
 
@@ -110,17 +110,17 @@ while ($data=mysqli_fetch_array($query))
 {
 ?>
 	<article class="categorie">
-		<span><?php echo $data['titre']; ?></span>						
-			
-				<?php				
+		<span><?php echo $data['titre']; ?></span>
+
+				<?php
 				$sql2="SELECT sous_categorie.titre, sous_categorie.id  as idsous, id_categorie, categorie.id from sous_categorie, categorie where id_categorie = categorie.id";
 				$query2=mysqli_query($base, $sql2);
 				while($data2=mysqli_fetch_array($query2))
 				{
 				if($data2['id_categorie']==$data['id'])
-				{	
+				{
 				?>
-				<div>	
+				<div>
 				<form class="topic" method="get" action="index.php">
 				<input type="hidden" name="numcategorie" value="<?php echo $data2['id_categorie'];?>">
 				<input type="hidden" name="numtopic" value="<?php echo $data2['idsous']; ?>">
@@ -130,9 +130,9 @@ while ($data=mysqli_fetch_array($query))
 				</form><br>
 				</div>
 				<?php
-				}			
 				}
-				?>		
+				}
+				?>
 	</article>
 <?php
 }
